@@ -1,18 +1,22 @@
-public class Creature{
+package worldofwonders;
+
+public class Creature implements LivingBeing {
   private String name;
-  private double replicationChange;
-  private double deathChange;
+  private double replicationChance;
+  private double deathChance;
 
-public Creature(String name, double replicationChange, double deathChance)
+public Creature(String name, double replicationChance, double deathChance)
   this.name = name;
-  this.replicationChange = replicationChange;
-  this.deathChange = deathChange;
+  this.replicationChance = replicationChance;
+  this.deathChance = deathChance;
 }
-
+@Override
 public void die(){
 }
 
+@Override
 public Creature reproduce (){
+  return null;
 }
 
 
