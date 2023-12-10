@@ -24,8 +24,6 @@ for (Creature creature : creatures) {
   creature.updateHunger();
   creature.die();
 }
-  public void outputStats() {
-    System.out.println("Number of creatures: " + creatures.size());
 }
 }
-}
+
