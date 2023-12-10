@@ -7,6 +7,8 @@ public class Hello {
     for(int i = 0; i < 100; i++){
       world.createCreature();
       world.spawnFood();
+      world.update();
+      world.outputStats();
     }
   }
 }
