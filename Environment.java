@@ -12,9 +12,20 @@ public Environment(){
 
 public abstract void createCreature();
 public abstract void spawnFood();
+public abstract void update();
+public abstract void outputStats();
 
 public List<Creature> getCreatures(){
   return creatures;
 }
 
+protected void updateCreatures() {
+for (Creature creature : creatures) {
+  creature.updateHunger();
+  creature.die();
+}
+  public void outputStats() {
+    System.out.println("Number of creatures: " + creatures.size());
+}
+}
 }
