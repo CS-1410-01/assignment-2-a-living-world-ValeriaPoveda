@@ -1,27 +1,42 @@
 package worldofwonders;
 
-import java.util.Random;
-
 public class World extends Environment {
-  private double creatureSpawnChance;
+  private int foodAvailability;
 
-  public World (double creatureSpawnChance){
+  public World (double initialFood) {
     super();
-    this.creatureSpawnChance = creatureSpawnChance;
+    this.foodAvailability = (int) (initialFood * 100);
+  }
+
+  @Override 
+  public void createCreature() {
+    creatures.add(new Creature (NameGenerator.getRandomName(), 0.1, 0.1));
   }
 
   @Override
-   public void createCreature(){
-     if (Math.random() < creatureSpawnChance) {
-       Creature newCreature = new Creature(Name.Generator.getRandomeName(), 0.5, 0.2);
-       creatures.add(newCreature);
-     }
-   }
+  public void spawnFood() {
+    this.foodAvailability += 10;
+  }
+
+  @Override public void update() {
+    for (Creature creature : creatures) {
+      creature.updateHunger();
+      creature.die();
+      Creature offspring = creature.reproduce();
+      if (offspring != null) {
+        creatures.add(offspring);
+      }
+    }
+    this.outputStats();
+  }
 
   @Override
-  public void spawnFood(){
+  public void outputStats(){
+    System.out.println("Population: " + creatures.size());
+    System.out.println("Food Availability: " + foodAvailability);
   }
 }
+  
 
   
   
