@@ -6,7 +6,7 @@ public class Creature implements LivingBeing {
   private double deathChance;
   private int hunger;
 
-public Creature(String name, double replicationChance, double deathChance)
+public Creature(String name, double replicationChance, double deathChance){
   this.name = name;
   this.replicationChance = replicationChance;
   this.deathChance = deathChance;
@@ -51,7 +51,7 @@ public Creature reproduce (){
     return this.hunger >= 70;
   }
 
-  priate void increaseHunger(int amount){
+  private void increaseHunger(int amount){
     this.hunger += amount;
   }
 
