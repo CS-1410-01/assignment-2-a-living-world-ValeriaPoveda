@@ -1,6 +1,6 @@
 package worldofwonders;
 
-import java.itl.Random;
+import java.util.Random;
 
 public class World extends Environment {
   public World() {
