@@ -22,14 +22,14 @@ public void move(int newX, int newY) {
   this.yPosition = newY;
   }
 
-public void interactWithEnv(World world){
+public void interactWithEnvironment(World world){
   int food = world.getFoodAtPosition(xPosition, yPosition);
   if (food > 0){
     eatFood(world, food);
   }
 }
 
-public void interactWithOthers(Creature otherCreature){
+public void interactWithCreature(Creature otherCreature){
 }
 
 private void eatFood(World world, int food){
@@ -85,6 +85,6 @@ public Creature reproduce (){
         this.hunger -= amount;
   } else {
     this.hunger = 0;
+    }
   }
-}
 }
