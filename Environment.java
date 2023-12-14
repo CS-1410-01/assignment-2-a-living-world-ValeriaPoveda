@@ -23,18 +23,44 @@ public List<Creature> getCreatures(){
 }
 
 protected void updateCreatures() {
-for (Creature creature : creatures) {
-  creature.updateHunger();
-  creature.die();
-  Creature offspring = creature.reproduce();
-  if (offspring != null){
-    creatures.add(offspring);
+  List<Creature> newOffspring = new ArrayList<>();
+  for (Creature creature : creatures) {
+      creature.updateHunger();
+      creature.die();
+      Creature offspring = creature.reproduce();
+      if (offspring != null){
+        newOffspring.add(offspring);
   }
-  creature.interactWithEnv(this);
-  for (Creature otherCreature : creatures){
-    if (creature != otherCreature){
-      creature.interactWithCreature(otherCreature)
+    creature.interactWithEnvironment(this);
+    for (Creature otherCreature : creatures){
+      if (creature != otherCreature){
+        creature.interactWithCreature(otherCreature);
+    }
+  }
 }
+  creatures.addAll(newOffspring);
+  this.outputStats();
 }
+
+protected void initializeFoodGrid() {
+  Random random = new Random();
+  for (int i = 0; i < foodGrid.length; i++){
+    for (int j = 0; j < foodGrid[i].length; j++){
+      foodGrid[i][j] = random.nextInt(10);
+    }
+  }
+}
+
+public int getFoodAtPosition(int x, int y){
+  return foodGrid[x][y];
+}
+
+public void decreaseFoodAtPosition(int x, int y, int amount) {
+  if (foodGrid[x][y] - amount >= 0){
+    foodGrid[x][y] -= amount;
+  } else {
+    foodGrid[x][y] = 0;
+    }
+  }
 }
 
