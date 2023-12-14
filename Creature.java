@@ -5,13 +5,38 @@ public class Creature implements LivingBeing {
   private double replicationChance;
   private double deathChance;
   private int hunger;
+  private int xPosition;
+  private int yPosition;
 
-public Creature(String name, double replicationChance, double deathChance){
+public Creature(String name, double replicationChance, double deathChance, int xPosition, int yPosition){
   this.name = name;
   this.replicationChance = replicationChance;
   this.deathChance = deathChance;
   this.hunger = 50;
+  this.xPosition = xPosition;
+  this.yPosition = yPosition;
 }
+  
+public void move(int newX, int newY) {
+  this.xPosition = newX;
+  this.yPosition = newY;
+  }
+
+public void interactWithEnv(World world){
+  int food = world.getFoodAtPosition(xPosition, yPosition);
+  if (food > 0){
+    eatFood(world, food);
+  }
+}
+
+public void interactWithOthers(Creature otherCreature){
+}
+
+private void eatFood(World world, int food){
+  decreaseHunger(food*3);
+  world.decreaseFoodAtPosition(xPosition, yPosition, food);
+}
+  
 @Override
 public void die(){
   if (isDead() || isStarving()){
@@ -23,7 +48,7 @@ public void die(){
 public Creature reproduce (){
   if (Math.random() < replicationChance) {
     System.out.println(this.name + " has reproduced.");
-    return new Creature(NameGenerator.getRandomName(), replicationChance, deathChance);
+    return new Creature(NameGenerator.getRandomName(), replicationChance, deathChance, xPosition, yPosition);
   }
   return null;
 }
@@ -61,4 +86,5 @@ public Creature reproduce (){
   } else {
     this.hunger = 0;
   }
+}
 }
