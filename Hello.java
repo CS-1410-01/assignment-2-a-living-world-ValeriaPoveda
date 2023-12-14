@@ -1,5 +1,7 @@
 package worldofwonders;
 
+import java.util.Random;
+
 public class Hello {
   public static void main(String[] args) {
     Environment world = new World(0.5);
@@ -10,5 +12,8 @@ public class Hello {
       world.update();
       world.outputStats();
     }
+  }
+  private static int getRandomPosition(){
+    return (int) (Math.random()*150);
   }
 }
